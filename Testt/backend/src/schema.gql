@@ -1,0 +1,127 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type TrelloUsers {
+  _id: String!
+  name: String!
+  email: String!
+  password: String!
+  phone: String!
+  privateKey: String
+}
+
+type Login {
+  name: String!
+  email: String!
+  password: String!
+  phone: String!
+}
+
+type Task {
+  _id: String!
+  Title: String!
+  Description: String!
+  index: Int
+  Column: String!
+}
+
+type Column {
+  _id: String!
+  title: String!
+  boardId: String
+  TaskList: [Task!]
+}
+
+type TrelloBoard {
+  _id: String!
+  name: String!
+  ColumnList: [Column!]
+}
+
+type Query {
+  FindAllTrelloUsers: [TrelloUsers!]!
+  findTrelloUsersById(id: UpdateTrelloUser!): TrelloUsers!
+  getTrelloUserByEmail(username: String!): TrelloUsers!
+  getAllBoard: [TrelloBoard!]!
+  GetBoardById(id: String!): TrelloBoard!
+  getColumnInBoard: [TrelloBoard!]!
+  getAllColumn: [Column!]!
+  getColumnById(id: String!): Column!
+  getTasksinColumn: [Column!]!
+  getAllTasks: [Task!]!
+  getTaskById(id: String!): Task!
+}
+
+input UpdateTrelloUser {
+  id: String
+  name: String!
+  email: String!
+  password: String!
+  phone: String!
+  privateKey: String
+}
+
+type Mutation {
+  CreateTrelloUser(CreateTrelloUser: CreateTrelloUser!): TrelloUsers!
+  updateTrelloUserById(id: String!, UpdateTrelloUser: UpdateTrelloUser!): TrelloUsers!
+  removeTrelloUserById(id: String!): TrelloUsers!
+  UserLogin(createLoginInput: CreateLoginInput!): Login!
+  LoginTrello(email: String!, password: String!): String!
+  createBoard(CreateBoardInput: CreateBoardInput!): TrelloBoard!
+  updateBoard(id: String!, updateBoardInput: UpdateBoardInput!): TrelloBoard!
+  removeBoard(id: String!): TrelloBoard!
+  createColumn(createColumnInput: CreateColumnInput!): Column!
+  removeColumn(id: String!): Column!
+  createTask(createTaskInput: CreateTaskInput!): Task!
+  updateTask(id: String!, updateTaskInput: UpdateTaskInput!): Task!
+  DeleteTask(id: String!): Task!
+  swapTasks(taskId1: String!, taskId2: String!): [Task!]!
+  swapColumn(taskId1: String!, column: String!, index: Float!): [Task!]!
+}
+
+input CreateTrelloUser {
+  name: String!
+  email: String!
+  password: String!
+  phone: String!
+  privateKey: String
+}
+
+input CreateLoginInput {
+  name: String!
+  email: String!
+  password: String!
+  phone: String!
+}
+
+input CreateBoardInput {
+  _id: String
+  name: String!
+}
+
+input UpdateBoardInput {
+  id: String
+  name: String!
+  userId: String!
+}
+
+input CreateColumnInput {
+  _id: String
+  title: String!
+  boardId: String!
+}
+
+input CreateTaskInput {
+  Title: String!
+  Description: String!
+  index: Int
+  Column: String!
+}
+
+input UpdateTaskInput {
+  Title: String!
+  Description: String!
+  index: Int
+  Column: String
+}
